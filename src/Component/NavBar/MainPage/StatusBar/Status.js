@@ -72,7 +72,8 @@ class Status extends Component {
                 </Paper>:
 
                 <Paper className="statusbar__status">
-                    <img src={this.props.object.statusImageURL} className="status__image" />       
+                    <img src={this.props.object.statusImageURL} className="status__image" />  
+                    <i class="fa-regular fa-trash-can icon-status"></i>     
                 </Paper>
 
 

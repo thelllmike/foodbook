@@ -9,6 +9,9 @@ import market from "../../images/market.svg";
 import group from "../../images/groups.svg";
 import { Avatar } from "@material-ui/core";
 import { getImage } from "../../GetImage";
+import LoginHome from "../LoginHome/LoginHome";
+import { IconButton } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 class NavBar extends Component {
   constructor(props) {
@@ -17,6 +20,12 @@ class NavBar extends Component {
       image: JSON.parse(localStorage.getItem("user")).userImage,
     };
   }
+
+  handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
+
   render() {
     return (
       <div>
@@ -53,15 +62,20 @@ class NavBar extends Component {
           <Grid item xs={3}>
             <div className="navbar__right">
               <div className="navbar__righttab">
-                <a href="#">
-                  <Avatar
-                    className="navbar__rightimg"
-                    src={getImage(this.state.image)}
-                  />
-                  <div className="navbar__profilename">
+                <Avatar
+                  className="navbar__rightimg"
+                  src={getImage(this.state.image)}
+                />
+                <div className="navbar__profilename">
+                  <a href={LoginHome}>
                     {JSON.parse(localStorage.getItem("user")).userName}
-                  </div>
-                </a>
+                  </a>
+                </div>
+                <div className="logout__button">
+                  <IconButton onClick={this.handleLogout}>
+                    <ExitToAppIcon />
+                  </IconButton>
+                </div>
               </div>
             </div>
           </Grid>

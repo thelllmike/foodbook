@@ -22,3 +22,9 @@
     height: 200px;
     border-radius: 5px;
 }
+
+.icon-status {
+    position: relative;
+    bottom: 2rem;
+    color: #ff0000;
+}

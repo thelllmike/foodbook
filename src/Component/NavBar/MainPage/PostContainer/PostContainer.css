@@ -89,7 +89,16 @@
 }
 
 .icons {
-    width: 20%;
+    width: 10%;
+    position: relative;
+    bottom: 0.6rem;
+
+    
+}
+
+.delete-icon {
+    width: 30%;
+    /* margin-left: 10%; */
 }
 
 a {
@@ -101,4 +110,17 @@ button {
     border: none;
     border-radius: 5px;
     width: 80%;
+    margin-bottom: 1%;
+}
+
+.icons-delete {
+    width: 10%;
+    /* margin-left: 10%; */
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: relative;
+    bottom: -1rem;
+    cursor: pointer;
 }
