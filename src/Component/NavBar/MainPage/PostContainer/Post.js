@@ -19,6 +19,70 @@ class Post extends Component {
       comment: null,
     };
   }
+
+  //delete
+
+  deletePost = () => {
+    const postID = this.props.object.postID;
+    fetch(`http://localhost:8080/api/postService/delete/${postID}`, {
+      method: "DELETE"
+    })
+      .then(response => {
+        if (response.ok) {
+          // Post deletion was successful
+          // Perform necessary actions here, such as updating state or navigating to a different page
+          // For example, you can update the state to trigger a re-render of the component
+          this.setState({ postDeleted: true });
+          
+          // Alternatively, you can navigate to a different page
+          // Replace '/posts' with the desired route to navigate to
+          // this.props.history.push('/posts');
+        } else {
+          // Post deletion failed
+          // Handle the error case accordingly
+          throw new Error('Post deletion failed.');
+        }
+      })
+      .catch(error => {
+        // Error occurred during the deletion process
+        // Handle the error case accordingly
+        console.error(error);
+      });
+  };
+
+
+
+  deleteComment = () => {
+    const commentID = this.props.object.commentID;
+    fetch(`http://localhost:8080/api/commentService/delete/${commentID}`, {
+      method: "DELETE"
+    })
+      .then(response => {
+        if (response.ok) {
+          // Post deletion was successful
+          // Perform necessary actions here, such as updating state or navigating to a different page
+          // For example, you can update the state to trigger a re-render of the component
+          this.setState({ postDeleted: true });
+          
+          // Alternatively, you can navigate to a different page
+          // Replace '/posts' with the desired route to navigate to
+          // this.props.history.push('/posts');
+        } else {
+          // Post deletion failed
+          // Handle the error case accordingly
+          throw new Error('Post deletion failed.');
+        }
+      })
+      .catch(error => {
+        // Error occurred during the deletion process
+        // Handle the error case accordingly
+        console.error(error);
+      });
+  };
+  
+  
+  
+
   getData = () => {
     const thisContext = this;
     fetch(
@@ -135,14 +199,23 @@ class Post extends Component {
               </button>
             </div>
 
-            <div className="post__tab">
+                    <div className="post__tab">
+                <button onClick={this.deletePost}>
+                <div className="post__tabfirst">
+                    <img className="post__tabimg icons" src={deleteicon} alt="Delete Icon" />
+                </div>
+                <div className="post__tabtext">Delete</div>
+                </button>
+            </div>
+
+            {/* <div className="post__tab">
               <button>
                 <div className="post__tabfirst">
                   <img className="post__tabimg icons" src={deleteicon} />
                 </div>
                 <div className="post__tabtext">Delete</div>
               </button>
-            </div>
+            </div> */}
           </div>
           {/* comment box */}
           <div className="upload__comment">
@@ -155,7 +228,17 @@ class Post extends Component {
                       className="comment_img"
                     />
                     <div className="comment_text">{item.comment}</div>
+                    
+                    <div className="post__tab">
+                <button onClick={this.deleteComment}>
+                <div className="post__tabfirst">
+                    <img className="post__tabimg icons" src={deleteicon} alt="Delete Icon" />
+                </div>
+                <div className="post__tabtext">Delete</div>
+                </button>
+            </div>
                   </div>
+                  
                 ) : (
                   <span></span>
                 )
