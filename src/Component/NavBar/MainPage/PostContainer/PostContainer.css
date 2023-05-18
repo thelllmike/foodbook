@@ -87,3 +87,18 @@
     width: 100%;
     text-align: right;
 }
+
+.icons {
+    width: 20%;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: #efeded57;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+}
