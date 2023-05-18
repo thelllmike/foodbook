@@ -51,26 +51,19 @@ class Post extends Component {
   };
 
 
-
-  deleteComment = () => {
-    const commentID = this.props.object.commentID;
+  deleteComment = (commentID) => {
     fetch(`http://localhost:8080/api/commentService/delete/${commentID}`, {
       method: "DELETE"
     })
       .then(response => {
         if (response.ok) {
-          // Post deletion was successful
-          // Perform necessary actions here, such as updating state or navigating to a different page
-          // For example, you can update the state to trigger a re-render of the component
-          this.setState({ postDeleted: true });
-          
-          // Alternatively, you can navigate to a different page
-          // Replace '/posts' with the desired route to navigate to
-          // this.props.history.push('/posts');
+          // Comment deletion was successful
+          // Perform necessary actions here, such as updating state or fetching updated comments
+          this.getData();
         } else {
-          // Post deletion failed
+          // Comment deletion failed
           // Handle the error case accordingly
-          throw new Error('Post deletion failed.');
+          throw new Error('Comment deletion failed.');
         }
       })
       .catch(error => {
@@ -79,7 +72,6 @@ class Post extends Component {
         console.error(error);
       });
   };
-  
   
   
 
@@ -220,29 +212,28 @@ class Post extends Component {
           {/* comment box */}
           <div className="upload__comment">
             <div className="comment__section">
-              {this.state.comments.map((item, index) =>
-                index > this.state.comments.length - 4 ? (
-                  <div className="comment">
-                    <Avatar
-                      src={getImage(item.userImage)}
-                      className="comment_img"
-                    />
-                    <div className="comment_text">{item.comment}</div>
-                    
-                    <div className="post__tab">
-                <button onClick={this.deleteComment}>
-                <div className="post__tabfirst">
-                    <img className="post__tabimg icons" src={deleteicon} alt="Delete Icon" />
-                </div>
-                <div className="post__tabtext">Delete</div>
-                </button>
-            </div>
-                  </div>
-                  
-                ) : (
-                  <span></span>
-                )
-              )}
+            {this.state.comments.map((item, index) =>
+  index > this.state.comments.length - 4 ? (
+    <div className="comment" key={item.commentID}>
+      <Avatar
+        src={getImage(item.userImage)}
+        className="comment_img"
+      />
+      <div className="comment_text">{item.comment}</div>
+      <div className="post__tab">
+        <button onClick={() => this.deleteComment(item.commentID)}>
+          <div className="post__tabfirst">
+            <img className="post__tabimg icons" src={deleteicon} alt="Delete Icon" />
+          </div>
+          <div className="post__tabtext">Delete</div>
+        </button>
+      </div>
+    </div>
+  ) : (
+    <span key={item.commentID}></span>
+  )
+)}
+
             </div>
             <div className="upload__top">
               <div>
